@@ -1,9 +1,9 @@
-import React from "react";
+import * as React from 'react';
 import { createRoot } from "react-dom/client";
 
-const Home = () => {
+const Home = (props: {tab: string}) => {
     return (
-        <div>Hello World</div>
+        <div>Hello World TEST</div>
     );
 }
 

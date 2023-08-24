@@ -1,29 +1,37 @@
+/* eslint @typescript-eslint/no-var-requires: "off" */
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintWebpackPlugin = require("eslint-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 // const webpack = require("webpack");
 
 module.exports = {
     entry: {
-        "main": "./src/home.jsx"
+        "main": "./src/home.tsx"
     },
+    devtool: 'inline-source-map',
     output: {
-        path: path.join(__dirname, "/dist"),
+        path: path.resolve(__dirname, "dist"),
+        filename: 'bundle.js'
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "src/home.html",
+            template: path.resolve(__dirname, "src", "home.html"),
         }),
-        new ESLintWebpackPlugin({ extensions: ['js', 'jsx', 'ts', 'tsx'] })
+        new ESLintWebpackPlugin({ extensions: ['js', 'jsx', 'ts', 'tsx'] }),
+        // new CleanWebpackPlugin()
     ],
     devServer: {
+        static: './dist',
         port: 3000,
-        devMiddleware: {
-            writeToDisk: true
-        }
     },
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                use: ['babel-loader', 'ts-loader'],
+                exclude: /node_modules/,
+            },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,

@@ -1,8 +1,9 @@
 {
     "plugins": [
-        "react"
+        "react",
+        "@typescript-eslint"
     ],
-    "parser": "@babel/eslint-parser",
+    "parser": "@typescript-eslint/parser",
     "env": {
         "es6":     true,
         "browser": true,
@@ -11,9 +12,13 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-        "max-len": [1, 140, 2, {"ignoreComments": true}]
+        "max-len": [1, 140, 2, {"ignoreComments": true}],
+        "@typescript-eslint/no-unused-vars": "off"
+
     }
 }
